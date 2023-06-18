@@ -1,7 +1,9 @@
 package com.jopezin.workshopmongodb.resources;
 
 import com.jopezin.workshopmongodb.domain.User;
+import com.jopezin.workshopmongodb.services.UserService;
 import org.apache.coyote.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,12 +17,12 @@ import java.util.List;
 @RequestMapping(value = "/users")
 public class UserResource {
 
+    @Autowired
+    public UserService service;
+
     @GetMapping
     public ResponseEntity<List<User>> findAll(){
-        User maria = new User(1, "maria", "maria@gmail.com");
-        User joao = new User(2,"joao","joao@gmail.com");
-        List<User> list = new ArrayList<>();
-        list.addAll(Arrays.asList(maria, joao));
+        List<User> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
 }
