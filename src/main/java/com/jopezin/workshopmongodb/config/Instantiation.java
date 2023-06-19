@@ -4,6 +4,7 @@ package com.jopezin.workshopmongodb.config;
 import com.jopezin.workshopmongodb.domain.Post;
 import com.jopezin.workshopmongodb.domain.User;
 import com.jopezin.workshopmongodb.dto.AuthorDTO;
+import com.jopezin.workshopmongodb.dto.CommentDTO;
 import com.jopezin.workshopmongodb.repositories.PostRepository;
 import com.jopezin.workshopmongodb.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,13 @@ public class Instantiation implements CommandLineRunner {
 
         Post post1 = new Post(null, LocalDate.from(dtf.parse("21/03/2018")),"Partiu viagem", "Vou viajar para Sao Paulo. Abracos!", new AuthorDTO(maria));
         Post post2 = new Post(null, LocalDate.from(dtf.parse("23/03/2018")),"Bom dia", "Acordei feliz hoje!",new AuthorDTO(maria));
+
+        CommentDTO c1 = new CommentDTO("Boa viagem mano!", LocalDate.from(dtf.parse("21/03/2018")), new AuthorDTO(alex));
+        CommentDTO c2 = new CommentDTO("Aproveite", LocalDate.from(dtf.parse("22/03/2018")), new AuthorDTO(bob));
+        CommentDTO c3 = new CommentDTO("Tenha um otimo dia", LocalDate.from(dtf.parse("23/03/2018")), new AuthorDTO(alex));
+
+        post1.getComments().addAll(Arrays.asList(c1, c2));
+        post2.getComments().add(c3);
 
         postRepository.saveAll(Arrays.asList(post1,post2));
 
