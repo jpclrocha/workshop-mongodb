@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Document(collection = "post")
-public class Post implements Serializable {
+public class Post implements Serializable{
     @Id
     private String id;
 
